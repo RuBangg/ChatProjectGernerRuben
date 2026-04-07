@@ -20,13 +20,20 @@ console.log(users)
 
 app.get('/', (request, response)=>{
     const validUser = request.session.validUser
-    response.render('index', {validUser})
+    const username = request.session.username
+    response.render('index', {validUser, username})
 })
 
 app.post('/login', (request, response)=>{
     const {username, password} = request.body
     console.log(username + " " + password)
-    request.session.validUser = checkUser(username, password)
+    let user = getUserFromUsernameAndPassword(username, password)
+    if (user) {
+        request.session.validUser = true
+        request.session.username = user.username
+    } else {
+        request.session.validUser = false
+    }
     console.log(request.session.validUser)
     response.redirect('/')
 })
@@ -34,7 +41,7 @@ app.post('/login', (request, response)=>{
 app.listen(8960, ()=>{console.log('Serveren kører på port 8960')})
 
 
-function checkUser(username, password) {
+function getUserFromUsernameAndPassword(username, password) {
     console.log(username, password)
     const user = users.find(user => user.username == username && user.password == password)
     if (user) {
