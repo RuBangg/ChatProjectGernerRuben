@@ -9,3 +9,4 @@ class Message{
     static id = 1
 }
 export{Message}
+
