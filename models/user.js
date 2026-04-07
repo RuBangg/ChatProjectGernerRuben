@@ -4,7 +4,7 @@ class User {
         this.password = password
         this.dateCreation = dateCreation
         this.userLevel = userLevel
-        this.id = id++
+        this.id = User.id++
     }
     static id = 1
 }

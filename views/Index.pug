@@ -4,4 +4,7 @@ html
         //link(rel="stylesheet", href="/style.css")
     body 
         h1 SendingRock
-                include snippets/loginform.pug
+        if (validUser)
+            include snippets/chatsOverview.pug  
+        else
+            include snippets/loginform.pug

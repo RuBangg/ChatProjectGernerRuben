@@ -3,7 +3,7 @@ class Chat {
         this.name = name
         this.dateCreation = dateCreation
         this.userOwner = userOwner
-        this.id = id++
+        this.id = Chat.id++
         this.messagesHistory = []
     }
 
