@@ -11,3 +11,19 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }))
+
+app.get('/', (request, response)=>{
+    response.render('index')
+})
+
+app.post('/login', (request, response)=>{
+    
+})
+
+app.post('/login/newUser', (request, response)=>{
+    
+})
+
+app.get('/login', (request, response)=>{
+    
+})
