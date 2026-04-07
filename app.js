@@ -27,3 +27,6 @@ app.post('/login/newUser', (request, response)=>{
 app.get('/login', (request, response)=>{
     
 })
+
+
+app.listen(8960, ()=>{console.log('Serveren kører på port 8960')})
