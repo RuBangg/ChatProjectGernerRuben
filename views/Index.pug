@@ -5,6 +5,7 @@ html
     body 
         h1 SendingRock
         if (validUser)
-            include snippets/chatsOverview.pug  
+            include snippets/loggedin.pug  
         else
             include snippets/loginform.pug
+        include snippets/chatoverview.pug
