@@ -19,7 +19,8 @@ let users = [new User('Gerner', '123', new Date(), 3)]
 console.log(users)
 
 app.get('/', (request, response)=>{
-    response.render('index')
+    const validUser = request.session.validUser
+    response.render('index', {validUser})
 })
 
 app.post('/login', (request, response)=>{
@@ -29,15 +30,6 @@ app.post('/login', (request, response)=>{
     console.log(request.session.validUser)
     response.redirect('/')
 })
-
-app.post('/login/newUser', (request, response)=>{
-    
-})
-
-app.get('/login', (request, response)=>{
-    
-})
-
 
 app.listen(8960, ()=>{console.log('Serveren kører på port 8960')})
 
