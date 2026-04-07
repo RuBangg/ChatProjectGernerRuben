@@ -15,7 +15,7 @@ app.use(session({
     resave: true
 }))
 
-let users = [new User('Gerner', '123', new Date(), 3)]
+let users = [new User('Gerner', '123', new Date(), 3),new User('Ruben','321',new Date(Date.now()),3)]
 console.log(users)
 
 app.get('/', (request, response)=>{
@@ -29,6 +29,10 @@ app.post('/login', (request, response)=>{
     request.session.validUser = checkUser(username, password)
     console.log(request.session.validUser)
     response.redirect('/')
+})
+
+app.post('/makeUser',(request,response)=>{
+    response.redirect('makeUser')
 })
 
 app.listen(8960, ()=>{console.log('Serveren kører på port 8960')})
