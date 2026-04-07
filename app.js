@@ -38,8 +38,19 @@ app.post('/login', (request, response)=>{
     response.redirect('/')
 })
 
+app.post('/createUser',(request,response)=>{
+    let temp = new User(request.body.username,request.body.password,new Date(),1)
+    console.log(temp)
+    users.push(temp)
+    response.redirect('/')
+})
+
 app.post('/makeUser',(request,response)=>{
-    response.redirect('makeUser')
+    response.render('makeUserPug')
+})
+
+app.post('/return',(request,response)=>{
+    response.redirect('/')
 })
 
 app.listen(8960, ()=>{console.log('Serveren kører på port 8960')})

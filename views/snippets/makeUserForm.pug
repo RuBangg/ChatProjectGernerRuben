@@ -1,0 +1,7 @@
+#makeUserForm 
+    form(action="/createUser",method="POST")
+        input(type="text",name="username",placeholder="brugernavn")
+        input(type="text", name="password",placeholder="kodeord")
+        button(type="submit") create new user 
+    form(action="/return",method="POST")
+        button(type="submit") return
