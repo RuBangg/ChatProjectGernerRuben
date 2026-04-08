@@ -50,6 +50,13 @@ app.post('/makeUser',(request,response)=>{
     response.render('makeUserPug')
 })
 
+app.get('/chat/:id', (request, response)=>{
+    const id = parseInt(request.params.id)
+    const chat = chats.find(chat=>chat.id == id)
+    response.render('chat', {chat})
+})
+
+
 app.post('/return',(request,response)=>{
     response.redirect('/')
 })
