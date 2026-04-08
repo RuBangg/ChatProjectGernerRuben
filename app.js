@@ -17,6 +17,12 @@ app.use(session({
 
 let users = [new User('Gerner', '123', new Date(), 3), new User('Ruben','321',new Date(Date.now()),3)]
 let chats = [new Chat('Gerners chatrum om chatrum', new Date(), users[0]), new Chat('Ruben chatter', new Date(), users[1])]
+
+chats[0].messagesHistory[0] = new Message('sikke flot vjer vi har',users[0],chats[0])
+chats[0].messagesHistory[1] = new Message('du har vist ikke kigget ud af vinduet',users[1],chats[0])
+chats[0].messagesHistory[2] = new Message('jeg elsker rengvjer',users[0],chats[0])
+chats[0].messagesHistory[3] = new Message('suk',users[1],chats[0])
+
 console.log(users)
 
 app.get('/', (request, response)=>{
@@ -51,9 +57,13 @@ app.post('/makeUser',(request,response)=>{
 })
 
 app.get('/chat/:id', (request, response)=>{
+    if (request.session.validUser){
     const id = parseInt(request.params.id)
     const chat = chats.find(chat=>chat.id == id)
     response.render('chat', {chat})
+    }else{
+    response.render('/')
+    }
 })
 
 
