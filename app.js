@@ -28,7 +28,9 @@ console.log(users)
 app.get('/', (request, response)=>{
     const validUser = request.session.validUser
     const username = request.session.username
-    response.render('index', {validUser, username, chats})
+    const userLevel = request.session.userLevel
+    console.log(userLevel)
+    response.render('index', {validUser, username, userLevel, chats})
 })
 
 app.post('/login', (request, response)=>{
@@ -38,6 +40,9 @@ app.post('/login', (request, response)=>{
     if (user) {
         request.session.validUser = true
         request.session.username = user.username
+        request.session.userLevel = user.userLevel
+        request.session.userId = user.id
+        console.log(user.userLevel)
     } else {
         request.session.validUser = false
     }
@@ -54,6 +59,13 @@ app.post('/createUser',(request,response)=>{
 
 app.post('/makeUser',(request,response)=>{
     response.render('makeUserPug')
+})
+
+app.post('/newChat', (request, response)=>{
+    let user = getUserFromId(request.session.userId)
+    let chat = new Chat(request.body.name, new Date, user)
+    chats.push(chat)
+    response.redirect('/')
 })
 
 app.get('/chat/:id', (request, response)=>{
@@ -78,7 +90,17 @@ function getUserFromUsernameAndPassword(username, password) {
     console.log(username, password)
     const user = users.find(user => user.username == username && user.password == password)
     if (user) {
-        return true
+        return user
+    } else {
+        return false
+    }
+}
+
+function getUserFromId(id) {
+    console.log(id)
+    const user = users.find(user => user.id == id)
+    if (user) {
+        return user
     } else {
         return false
     }
