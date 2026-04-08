@@ -1,7 +1,28 @@
-#loginform {
-    padding: 3em;
-    background-color: rgb(64, 3, 230);
-    height: 100px;
-    width: 300px;
-    border-radius: 30px;
+body{
+    background: linear-gradient(45deg, #c16e6e, #3d0101);
 }
+
+button{
+    background-color:  #a52a2a;
+}
+
+button:hover{
+    background-color:#a52a2a8f ;
+    transform: translateY(3px);
+}
+
+input{
+    border-width: 4px;
+}
+
+.link {
+    color: rgb(81, 0, 255);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.link:hover {
+    transform: translateY(2px);
+    color: rgba(81, 0, 255, 0.55);
+}
+
