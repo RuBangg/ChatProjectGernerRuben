@@ -9,4 +9,4 @@ html
         p: strong= chat.name
             #chatHistory 
                 for message in chat.messagesHistory
-                    p #{message.user.name} #{message.besked}
+                    p #{message.user.username}: #{message.besked}
