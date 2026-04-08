@@ -15,13 +15,14 @@ app.use(session({
     resave: true
 }))
 
-let users = [new User('Gerner', '123', new Date(), 3),new User('Ruben','321',new Date(Date.now()),3)]
+let users = [new User('Gerner', '123', new Date(), 3), new User('Ruben','321',new Date(Date.now()),3)]
+let chats = [new Chat('Gerners chatrum om chatrum', new Date(), users[0]), new Chat('Ruben chatter', new Date(), users[1])]
 console.log(users)
 
 app.get('/', (request, response)=>{
     const validUser = request.session.validUser
     const username = request.session.username
-    response.render('index', {validUser, username})
+    response.render('index', {validUser, username, chats})
 })
 
 app.post('/login', (request, response)=>{

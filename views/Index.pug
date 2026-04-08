@@ -9,4 +9,9 @@ html
             include snippets/loggedin.pug  
         else
             include snippets/loginform.pug
-        include snippets/chatoverview.pug
+        #chatoverview
+            h2 chatterne
+            ul 
+                each chat in chats
+                    li
+                        a(href="/chat/" + chat.id) #{chat.name} 
