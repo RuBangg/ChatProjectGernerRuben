@@ -45,6 +45,14 @@ app.post('/login', (request, response)=>{
     response.redirect('/')
 })
 
+app.post('/chat/:id/sendMessage', (request, response) => {
+    const id = parseInt(request.params.id)
+    const chat = chats.find(chat => chat.id === id)
+    const msg = new Message(request.body.message, request.session.user, chat)
+    chat.messagesHistory.push(msg)
+    response.redirect(`/chat/${id}`)
+})
+
 app.post('/createUser',(request,response)=>{
     let temp = new User(request.body.username,request.body.password,new Date(),1)
     console.log(temp)

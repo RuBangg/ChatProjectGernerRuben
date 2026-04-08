@@ -1,6 +1,4 @@
-    form(action="/login",method="POST")
-        input(type="text",name="username",placeholder="brugernavn")
-        input(type="text", name="password",placeholder="kodeord")
-        button(type="submit") Login 
-    form(action="/makeUser",method="POST")
-        button(type="submit") New User
+#sendMessageInChat
+form(action=`/chat/${chat.id}/sendMessage`, method="post")
+    input(type="text", name="message", placeholder="Write something cool")
+    button(type="submit") send
