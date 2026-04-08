@@ -10,3 +10,4 @@ html
             #chatHistory 
                 for message in chat.messagesHistory
                     p #{message.user.username}: #{message.besked}
+        include snippets/sendMessageInChat.pug
