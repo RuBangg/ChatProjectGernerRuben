@@ -4,5 +4,9 @@ html
         title BestChatServisEver
         //link(rel="stylesheet", href="/style.css")
     body
-        h1 
-            #chat.name
+        h1 Chat
+        p: a(href="/") Startside
+        p: strong= chat.name
+            #chatHistory 
+                for message in chat.messagesHistory
+                    p #{message.user.name} #{message.besked}
