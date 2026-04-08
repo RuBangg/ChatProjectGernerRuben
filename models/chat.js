@@ -10,4 +10,4 @@ class Chat {
     static id = 1
 }
 
-export {Chat}
+export default Chat
