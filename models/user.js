@@ -9,4 +9,4 @@ class User {
     static id = 1
 }
 
-export {User}
+export default User
