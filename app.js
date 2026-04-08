@@ -33,6 +33,11 @@ app.get('/', (request, response)=>{
     response.render('index', {validUser, username, userLevel, chats})
 })
 
+app.post('/logOut',(request,response)=>{
+    request.session.destroy()
+    response.redirect('/')
+})
+
 app.post('/login', (request, response)=>{
     const {username, password} = request.body
     console.log(username + " " + password)
@@ -53,7 +58,8 @@ app.post('/login', (request, response)=>{
 app.post('/chat/:id/sendMessage', (request, response) => {
     const id = parseInt(request.params.id)
     const chat = chats.find(chat => chat.id === id)
-    const msg = new Message(request.body.message, request.session.user, chat)
+    const temp = getUserFromId(request.session.userId)
+    const msg = new Message(request.body.message, temp, chat)
     chat.messagesHistory.push(msg)
     response.redirect(`/chat/${id}`)
 })
@@ -65,7 +71,7 @@ app.post('/createUser',(request,response)=>{
     response.redirect('/')
 })
 
-app.post('/makeUser',(request,response)=>{
+app.post('/makeUser',(response)=>{
     response.render('makeUserPug')
 })
 
