@@ -5,8 +5,9 @@ html
         //link(rel="stylesheet", href="/style.css")
     body 
         h1 SendingRock
-        if (validUser)
-            include snippets/loggedin.pug  
+        if validUser
+            if userlevel = 3
+                include snippets/cChat.pug  
         else
             include snippets/loginform.pug
         #chatoverview
