@@ -24,6 +24,17 @@ chatRouter.get('/:id', (request, response)=>{
     }
 })
 
+app.delete('/:id', (request, response) => {
+    console.log("we got here");
+    const msgId = parseInt(request.params.id);
+    chats.forEach(chat => {
+        chat.messagesHistory = chat.messagesHistory.filter(
+            msg => msg.id !== msgId
+        );
+    });
+    response.sendStatus(200);
+});
+
 chatRouter.post('/:id/sendMessage', (request, response) => {
     const id = parseInt(request.params.id)
     const chat = getChatFromId(id)
@@ -31,5 +42,7 @@ chatRouter.post('/:id/sendMessage', (request, response) => {
     addMessage(request.body.message, user, chat)
     response.redirect(`/chats/${id}`)
 })
+
+
 
 export default chatRouter
