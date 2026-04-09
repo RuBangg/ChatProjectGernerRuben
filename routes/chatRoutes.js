@@ -24,7 +24,7 @@ chatRouter.get('/:id', (request, response)=>{
     }
 })
 
-app.delete('/:id', (request, response) => {
+chatRouter.delete('/:id', (request, response) => {
     console.log("we got here");
     const msgId = parseInt(request.params.id);
     chats.forEach(chat => {
