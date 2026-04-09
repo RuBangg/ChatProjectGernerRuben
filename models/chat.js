@@ -9,5 +9,4 @@ class Chat {
 
     static id = 1
 }
-
 export default Chat
