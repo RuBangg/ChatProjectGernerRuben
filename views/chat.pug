@@ -1,14 +1,16 @@
-html 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self';">
-    link(rel="stylesheet", href="/aStoneColdStyle.css")
-    head 
+html
+    head
+        meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self';")
+        link(rel="stylesheet", href="/aStoneColdStyle.css")
         title BestChatServisEver
-        //link(rel="stylesheet", href="/style.css")
     body
         h1 Chat
-        p: a(href="/") Startside
-        p: strong= chat.name
-            #chatHistory 
+        p
+            a(href="/") Startside
+
+        p
+            strong= chat.name
+        #chatHistory
                 for message in chat.messagesHistory
                     p #{message.user.username}: #{message.besked} 
         include snippets/sendMessageInChat.pug
