@@ -9,3 +9,15 @@
                     p(class="otherbesked") #{message.user.username}: #{message.besked}
 
                     GET http://localhost:8960/models/chat.js net::ERR_ABORTED 404 (Not Found)
+
+chatRouter.delete('/:id', async (request, response) => {
+    console.log("we got here");
+    const msgId = parseInt(request.params.id);
+    await deleteMessage(msgId)
+    chats.forEach(chat => {
+        chat.messagesHistory = chat.messagesHistory.filter(
+            msg => msg.id !== msgId
+        );
+    });
+    response.sendStatus(200);
+});

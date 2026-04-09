@@ -1,5 +1,5 @@
 import express from 'express'
-import {addChat, getChatFromId, getUserFromId, addMessage} from '../controllers/modelController.js'
+import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage} from '../controllers/modelController.js'
 
 const chatRouter = express.Router()
 
@@ -24,15 +24,16 @@ chatRouter.get('/:id', (request, response)=>{
     }
 })
 
-chatRouter.delete('/:id', (request, response) => {
+chatRouter.delete('/:id', async (request, response) => {
     console.log("we got here");
-    const msgId = parseInt(request.params.id);
-    chats.forEach(chat => {
-        chat.messagesHistory = chat.messagesHistory.filter(
-            msg => msg.id !== msgId
-        );
-    });
-    response.sendStatus(200);
+    try {
+        const msgId = parseInt(request.params.id);
+        await deleteMessage(msgId);
+        response.sendStatus(200);
+    } catch (error) {
+        console.error("DELETE ERROR:", error);
+        response.status(500).send("Something broke");
+    }
 });
 
 chatRouter.post('/:id/sendMessage', async (request, response) => {

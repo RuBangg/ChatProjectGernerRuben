@@ -5,13 +5,11 @@ document.querySelectorAll('.delete-btn').forEach(button => {
         console.log("clicked");
         const messageId = button.dataset.messageId;
         console.log("Deleting:", messageId);
-        const res = await fetch(`/chat/${messageId}`, {
+        const res = await fetch(`/chats/${messageId}`, {
             method: 'DELETE'
         });
         if (res.ok) {
             button.parentElement.remove(); 
-        } else {
-            alert("Delete failed");
         }
     });
 });

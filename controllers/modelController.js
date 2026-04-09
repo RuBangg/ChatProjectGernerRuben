@@ -94,7 +94,29 @@ async function addMessage(besked, user, chatId) {
     }
 }
 
-
+async function deleteMessage(messageId) {
+    // hente den chat den skal slættes fra og slætte den også slætte den fra alle og så write ny storeage fill
+    const msg = getMessageFromId(messageId)
+    const chat = getChatFromMessageId(messageId)
+    chat.messagesHistory = chat.messagesHistory.filter(message => message.id != msg.id)
+    allMessages = allMessages.filter(message =>message.id != msg.id)
+        if (Archive.fileExists('./data/messages.json')) {
+            console.log("tried to delete message")
+        try {
+            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+        } catch (error) {
+            console.log('FEJL')
+            console.log(error)
+        }
+    }
+    if (Archive.fileExists('./data/chats.json')) {
+        try {
+            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 
 function getUsers() {
@@ -118,9 +140,19 @@ function getChatFromId(id) {
     return chats.find(chat => chat.id == id)
 }
 
+function getMessageFromId(id){
+    return allMessages.find(msg => msg.id == id)
+}
+
+function getChatFromMessageId(id){
+    return chats.find(chat =>
+        chat.messagesHistory.some(msg => msg.id == id)
+    )
+}
+
 function getUserLevelFromId(id) {
     let user = getUserFromId(id)
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
+export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
