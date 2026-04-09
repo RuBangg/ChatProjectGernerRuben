@@ -11,7 +11,9 @@ userRouter.post('/login', (request, response)=>{
         request.session.username = user.username
         request.session.userLevel = user.userLevel
         request.session.userId = user.id
-        console.log(user.userLevel)
+        console.log(user)
+    } else {
+        request.session.validUser = false
     }
     console.log(request.session.validUser)
     response.redirect('/')
@@ -25,12 +27,12 @@ userRouter.post('/logout', (request,response)=>{
 userRouter.post('/create', (request,response)=>{
     const userLevel = Math.floor(Math.random() * 3) + 1
     const newUser = addUser(request.body.username, request.body.password, new Date(), userLevel)
-    console.log(newUser)
+    console.log('new User: ' + newUser)
     response.redirect('/')
 })
 
-userRouter.get('/make', (request,response)=>{
-    response.render('makeUserPug')
+userRouter.post('/make', (request,response)=>{
+    response.render('makeUserPug.pug', {})
 })
 
 export default userRouter

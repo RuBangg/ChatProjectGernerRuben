@@ -29,7 +29,7 @@ chatRouter.post('/:id/sendMessage', (request, response) => {
     const chat = getChatFromId(id)
     const user = getUserFromId(request.session.userId)
     addMessage(request.body.message, user, chat)
-    response.redirect(`/chat/${id}`)
+    response.redirect(`/chats/${id}`)
 })
 
 export default chatRouter

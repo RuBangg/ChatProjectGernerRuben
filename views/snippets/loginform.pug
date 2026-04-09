@@ -1,7 +1,7 @@
 #loginform 
-    form(action="/login",method="POST")
+    form(action="/users/login",method="POST")
         input(type="text",name="username",placeholder="brugernavn")
         input(type="text", name="password",placeholder="kodeord")
         button(type="submit") Login 
-    form(action="/makeUser",method="POST")
+    form(action="/users/make",method="POST")
         button(type="submit") New User

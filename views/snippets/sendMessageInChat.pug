@@ -1,4 +1,4 @@
 #sendMessageInChat
-form(action=`/chat/${chat.id}/sendMessage`, method="post")
+form(action=`/chats/${chat.id}/sendMessage`, method="post")
     input(type="text", name="message", placeholder="Write something cool")
     button(type="submit") send

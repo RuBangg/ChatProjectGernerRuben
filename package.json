@@ -1,4 +1,11 @@
 {
+  "name": "chatprojekt",
+  "version": "0.1A",
+  "description": "projekt skrevet af Gerner og Ruben",
+  "main": "app.js",
+  "author": "A. Gerner og N. Ruben",
+  "license": "ISC",
+  "type": "module",
   "dependencies": {
     "express": "^5.2.1",
     "express-session": "^1.19.0",

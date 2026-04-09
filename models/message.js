@@ -4,9 +4,9 @@ class Message{
         this.user = user
         this.id = Message.id++
         this.chat = chat
-
     }
     static id = 1
 }
+
 export default Message
 
