@@ -85,6 +85,13 @@ async function addMessage(besked, user, chatId) {
             console.log(error)
         }
     }
+    if (Archive.fileExists('./data/chats.json')) {
+        try {
+            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 

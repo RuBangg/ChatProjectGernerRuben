@@ -19,8 +19,8 @@ userRouter.post('/login', (request, response)=>{
     response.redirect('/')
 })
 
-userRouter.post('/logout', (request,response)=>{
-    request.session.destroy()
+userRouter.post('/logout', async (request,response)=>{
+    await request.session.destroy()
     response.redirect('/')
 })
 
