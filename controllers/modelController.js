@@ -5,6 +5,7 @@ import Message from "../models/message.js"
 
 let users = [new User('Gerner', '123', new Date(), 3), new User('Ruben','321',new Date(Date.now()),3)]
 let chats = [new Chat('Gerners chatrum om chatrum', new Date(), users[0]), new Chat('Ruben chatter', new Date(), users[1])]
+let allMessages = []
 
 let usersData = await Archive.readFile('./data/users.json')
 if (usersData) {
@@ -24,11 +25,14 @@ if (chatsData) {
     Chat.id = biggestID
 }
 
-//TODO fjern og kan tilføje ordentligt
-chats[0].messagesHistory[0] = new Message('sikke flot vjer vi har',users[0],chats[0])
-chats[0].messagesHistory[1] = new Message('du har vist ikke kigget ud af vinduet',users[1],chats[0])
-chats[0].messagesHistory[2] = new Message('jeg elsker rengvjer',users[0],chats[0])
-chats[0].messagesHistory[3] = new Message('suk',users[1],chats[0])
+let messagesData = await Archive.readFile('./data/messages.json')
+if (messagesData) {
+    allMessages = JSON.parse(messagesData)
+    const biggestID = messages.reduce((accumulator, message) => {
+         return message.id >= accumulator ? message.id : accumulator
+    },0)
+    Message.id = biggestID
+}
 
 async function addUser(username, password, dateCreation, userLevel) {
     const user = new User(username, password, dateCreation, userLevel)
@@ -57,15 +61,39 @@ async function addChat(name, dateCreation, userOwner) {
 async function addMessage(besked, user, chat) {
     const message = new Message(besked, user, chat)
     chat.messagesHistory.push(message)
-    //write to file
+    allMessages.push(message)
+    if (Archive.fileExists('./data/messages.json')) {
+        try {
+            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 function getUsers() {
     return users
 }
 
-function getchats() {
+function getChats() {
     return chats
 }
 
-export {addUser, addChat, addMessage, getUsers, getchats}
+function getUserFromUsernameAndPassword(username, password) {
+    const user = users.find(user => user.username == username && user.password == password)
+    if (user) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function getUserFromId(id) {
+    return users.find(user => user.id == id)
+}
+
+function getChatFromId(id) {
+    return chats.find(chat => chat.id == id)
+}
+
+export {addUser, addChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId}
