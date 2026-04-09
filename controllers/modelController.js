@@ -58,6 +58,19 @@ async function addChat(name, dateCreation, userOwner) {
     }
 }
 
+async function deleteChat(chatId) {
+    const chat = getChatFromId(chatId)
+    chats.filter(c => c!== chat)
+    if (Archive.fileExists('./data/messages.json')) {
+        try {
+            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+        } catch (error) {
+            console.log('FEJL')
+            console.log(error)
+        }
+    }
+}
+
 async function addMessage(besked, user, chatId) {
     const message = new Message(besked, user, chatId)
     const chat = getChatFromId(chatId)
@@ -73,6 +86,9 @@ async function addMessage(besked, user, chatId) {
         }
     }
 }
+
+
+
 
 function getUsers() {
     return users
@@ -100,4 +116,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
+export {addUser, addChat, deleteChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
