@@ -94,6 +94,17 @@ app.get('/chat/:id', (request, response) => {
     }
 })
 
+app.delete('/chat/:id',(request,response)=>{
+    console.log("we got here")
+    const msgId = request.params.id
+        chats.forEach(chat => {
+        chat.messagesHistory = chat.messagesHistory.filter(
+            msg => msg.id !== msgId
+        );
+    });
+    response.render()
+})
+
 
 app.post('/return',(request,response)=>{
     response.redirect('/')
