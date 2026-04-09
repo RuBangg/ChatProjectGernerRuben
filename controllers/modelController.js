@@ -96,4 +96,9 @@ function getChatFromId(id) {
     return chats.find(chat => chat.id == id)
 }
 
-export {addUser, addChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId}
+function getUserLevelFromId(id) {
+    let user = getUserFromId(id)
+    return user.userLevel
+}
+
+export {addUser, addChat, addMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}

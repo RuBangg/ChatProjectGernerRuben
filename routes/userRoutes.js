@@ -1,5 +1,5 @@
 import express from 'express'
-import {addUser, getUsers, getUserFromUsernameAndPassword} from '../controllers/modelController'
+import {addUser, getUsers, getUserFromUsernameAndPassword} from '../controllers/modelController.js'
 
 const userRouter = express.Router()
 
@@ -33,3 +33,4 @@ userRouter.get('/make', (request,response)=>{
     response.render('makeUserPug')
 })
 
+export default userRouter
