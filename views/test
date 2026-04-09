@@ -7,3 +7,5 @@
                     p(class="mybesked") #{message.user.username}: #{message.besked}
                 else 
                     p(class="otherbesked") #{message.user.username}: #{message.besked}
+
+                    GET http://localhost:8960/models/chat.js net::ERR_ABORTED 404 (Not Found)
