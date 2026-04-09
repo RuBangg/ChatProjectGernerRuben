@@ -8,6 +8,7 @@ const app = express()
  
 app.set('view engine', 'pug')
 app.use(express.static('assets'))
+app.use(express.static('public'))
 app.use(express.urlencoded())
 app.use(session({
     secret: 'Blablablalala',
@@ -94,17 +95,16 @@ app.get('/chat/:id', (request, response) => {
     }
 })
 
-app.delete('/chat/:id',(request,response)=>{
-    console.log("we got here")
-    const msgId = request.params.id
-        chats.forEach(chat => {
+app.delete('/chat/:id', (request, response) => {
+    console.log("we got here");
+    const msgId = parseInt(request.params.id);
+    chats.forEach(chat => {
         chat.messagesHistory = chat.messagesHistory.filter(
             msg => msg.id !== msgId
         );
     });
-    response.render()
-})
-
+    response.sendStatus(200);
+});
 
 app.post('/return',(request,response)=>{
     response.redirect('/')
