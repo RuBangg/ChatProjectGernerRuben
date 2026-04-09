@@ -58,8 +58,8 @@ app.post('/login', (request, response)=>{
 app.post('/chat/:id/sendMessage', (request, response) => {
     const id = parseInt(request.params.id)
     const chat = chats.find(chat => chat.id === id)
-    const temp = getUserFromId(request.session.userId)
-    const msg = new Message(request.body.message, temp, chat)
+    const user = getUserFromId(request.session.userId)
+    const msg = new Message(request.body.message, user, chat)
     chat.messagesHistory.push(msg)
     response.redirect(`/chat/${id}`)
 })
@@ -82,13 +82,15 @@ app.post('/newChat', (request, response)=>{
     response.redirect('/')
 })
 
-app.get('/chat/:id', (request, response)=>{
-    if (request.session.validUser){
-    const id = parseInt(request.params.id)
-    const chat = chats.find(chat=>chat.id == id)
-    response.render('chat', {chat})
-    }else{
-    response.render('/')
+app.get('/chat/:id', (request, response) => {
+    if (request.session.validUser) {
+        const id = parseInt(request.params.id)
+        const chat = chats.find(chat=>chat.id == id)
+        const user = users.find(u=>u.id === request.session.userId)
+        console.log(user.id)
+        response.render('chat', {chat,user})
+    } else {
+        response.render('/')
     }
 })
 

@@ -1,0 +1,9 @@
+                for message in chat.messagesHistory
+                    p #{message.user.username}: #{message.besked} 
+
+                            #chatHistory
+            for message in chat.messagesHistory
+                if user==message.user
+                    p(class="mybesked") #{message.user.username}: #{message.besked}
+                else 
+                    p(class="otherbesked") #{message.user.username}: #{message.besked}
