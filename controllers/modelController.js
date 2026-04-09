@@ -28,7 +28,7 @@ if (chatsData) {
 let messagesData = await Archive.readFile('./data/messages.json')
 if (messagesData) {
     allMessages = JSON.parse(messagesData)
-    const biggestID = messages.reduce((accumulator, message) => {
+    const biggestID = allMessages.reduce((accumulator, message) => {
          return message.id >= accumulator ? message.id : accumulator
     },0)
     Message.id = biggestID
@@ -58,14 +58,17 @@ async function addChat(name, dateCreation, userOwner) {
     }
 }
 
-async function addMessage(besked, user, chat) {
-    const message = new Message(besked, user, chat)
+async function addMessage(besked, user, chatId) {
+    const message = new Message(besked, user, chatId)
+    const chat = getChatFromId(chatId)
     chat.messagesHistory.push(message)
     allMessages.push(message)
+    console.log(message)
     if (Archive.fileExists('./data/messages.json')) {
         try {
             Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
         } catch (error) {
+            console.log('FEJL')
             console.log(error)
         }
     }

@@ -15,7 +15,7 @@ html
         p(class=(user.userlevel > 2 || user.id === message.user.id ? 'mybesked' : ''))
             | #{message.user.username}: #{message.besked+" "}
             
-            if user.userlevel > 2 || (user.id === message.user.id && userlevel > 1)
+            if user.userlevel > 2 || user.id === message.user.id
                 button.delete-btn(data-message-id=message.id) Delete
 
 include snippets/sendMessageInChat.pug

@@ -35,12 +35,11 @@ chatRouter.delete('/:id', (request, response) => {
     response.sendStatus(200);
 });
 
-chatRouter.post('/:id/sendMessage', (request, response) => {
-    const id = parseInt(request.params.id)
-    const chat = getChatFromId(id)
+chatRouter.post('/:id/sendMessage', async (request, response) => {
+    const chatId = parseInt(request.params.id)
     const user = getUserFromId(request.session.userId)
-    addMessage(request.body.message, user, chat)
-    response.redirect(`/chats/${id}`)
+    await addMessage(request.body.message, user, chatId)
+    response.redirect(`/chats/${chatId}`)
 })
 
 

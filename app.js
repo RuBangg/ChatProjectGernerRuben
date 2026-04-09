@@ -8,6 +8,7 @@ const app = express()
 
 app.set('view engine', 'pug')
 app.use(express.static('assets'))
+app.use(express.static('public'))
 app.use(express.urlencoded())
 app.use(session({
     secret: '01-20201-sssssssssh-JEG-SOVER',

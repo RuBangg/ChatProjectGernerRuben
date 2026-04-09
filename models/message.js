@@ -1,9 +1,9 @@
 class Message{
-    constructor(besked,user,chat){
+    constructor(besked,user,chatId){
         this.besked = besked
         this.user = user
         this.id = Message.id++
-        this.chat = chat
+        this.chatId = chatId
     }
     static id = 1
 }
