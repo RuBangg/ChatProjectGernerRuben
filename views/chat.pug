@@ -10,7 +10,12 @@ html
 
         p
             strong= chat.name
-        #chatHistory
-                for message in chat.messagesHistory
-                    p #{message.user.username}: #{message.besked} 
-        include snippets/sendMessageInChat.pug
+#chatHistory
+    for message in chat.messagesHistory
+        p(class=(user.userlevel > 2 || user.id === message.user.id ? 'mybesked' : ''))
+            | #{message.user.username}: #{message.besked+" "}
+            
+            if user.userlevel > 2 || user.id === message.user.id
+                button.delete-btn(data-message-id=message.id) Delete
+
+include snippets/sendMessageInChat.pug
