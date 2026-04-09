@@ -33,10 +33,39 @@ chats[0].messagesHistory[3] = new Message('suk',users[1],chats[0])
 async function addUser(username, password, dateCreation, userLevel) {
     const user = new User(username, password, dateCreation, userLevel)
     users.push(user)
-    //TODO write to file
+    if (Archive.fileExists('./data/users.json')) {
+        try {
+            Archive.writeFile('./data/users.json', JSON.stringify(users))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 async function addChat(name, dateCreation, userOwner) {
-    
+    const chat = new Chat(name, dateCreation, userOwner)
+    chats.push(chat)
+    if (Archive.fileExists('./data/chats.json')) {
+        try {
+            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
+
+async function addMessage(besked, user, chat) {
+    const message = new Message(besked, user, chat)
+    chat.messagesHistory.push(message)
+    //write to file
+}
+
+function getUsers() {
+    return users
+}
+
+function getchats() {
+    return chats
+}
+
 
