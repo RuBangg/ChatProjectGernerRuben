@@ -68,4 +68,4 @@ function getchats() {
     return chats
 }
 
-
+export {addUser, addChat, addMessage, getUsers, getchats}
