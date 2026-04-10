@@ -39,7 +39,7 @@ async function addUser(username, password, dateCreation, userLevel) {
     users.push(user)
     if (Archive.fileExists('./data/users.json')) {
         try {
-            Archive.writeFile('./data/users.json', JSON.stringify(users))
+            await Archive.writeFile('./data/users.json', JSON.stringify(users))
         } catch (error) {
             console.log(error)
         }
@@ -51,7 +51,7 @@ async function addChat(name, dateCreation, userOwner) {
     chats.push(chat)
     if (Archive.fileExists('./data/chats.json')) {
         try {
-            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+            await Archive.writeFile('./data/chats.json', JSON.stringify(chats))
         } catch (error) {
             console.log(error)
         }
@@ -63,7 +63,7 @@ async function deleteChat(chatId) {
     chats.filter(c => c!== chat)
     if (Archive.fileExists('./data/messages.json')) {
         try {
-            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+            await Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
         } catch (error) {
             console.log('FEJL')
             console.log(error)
@@ -79,7 +79,7 @@ async function addMessage(besked, user, chatId) {
     console.log(message)
     if (Archive.fileExists('./data/messages.json')) {
         try {
-            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+            await Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
         } catch (error) {
             console.log('FEJL')
             console.log(error)
@@ -87,7 +87,7 @@ async function addMessage(besked, user, chatId) {
     }
     if (Archive.fileExists('./data/chats.json')) {
         try {
-            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+            await Archive.writeFile('./data/chats.json', JSON.stringify(chats))
         } catch (error) {
             console.log(error)
         }
