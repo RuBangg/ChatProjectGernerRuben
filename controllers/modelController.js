@@ -13,7 +13,7 @@ if (usersData) {
     const biggestID = users.reduce((accumulator, user) => {
          return user.id >= accumulator ? user.id : accumulator
     },0)
-    User.id = biggestID
+    User.id = biggestID + 1
 }
 
 let chatsData = await Archive.readFile('./data/chats.json')
@@ -22,7 +22,7 @@ if (chatsData) {
     const biggestID = chats.reduce((accumulator, chat) => {
          return chat.id >= accumulator ? chat.id : accumulator
     },0)
-    Chat.id = biggestID
+    Chat.id = biggestID + 1
 }
 
 let messagesData = await Archive.readFile('./data/messages.json')
@@ -31,7 +31,7 @@ if (messagesData) {
     const biggestID = allMessages.reduce((accumulator, message) => {
          return message.id >= accumulator ? message.id : accumulator
     },0)
-    Message.id = biggestID
+    Message.id = biggestID + 1
 }
 
 async function addUser(username, password, dateCreation, userLevel) {
@@ -39,7 +39,7 @@ async function addUser(username, password, dateCreation, userLevel) {
     users.push(user)
     if (Archive.fileExists('./data/users.json')) {
         try {
-            Archive.writeFile('./data/users.json', JSON.stringify(users))
+            await Archive.writeFile('./data/users.json', JSON.stringify(users))
         } catch (error) {
             console.log(error)
         }
@@ -51,7 +51,7 @@ async function addChat(name, dateCreation, userOwner) {
     chats.push(chat)
     if (Archive.fileExists('./data/chats.json')) {
         try {
-            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+            await Archive.writeFile('./data/chats.json', JSON.stringify(chats))
         } catch (error) {
             console.log(error)
         }
@@ -80,7 +80,7 @@ async function addMessage(besked, user, chatId) {
     console.log(message)
     if (Archive.fileExists('./data/messages.json')) {
         try {
-            Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+            await Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
         } catch (error) {
             console.log('FEJL')
             console.log(error)
@@ -88,7 +88,7 @@ async function addMessage(besked, user, chatId) {
     }
     if (Archive.fileExists('./data/chats.json')) {
         try {
-            Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+            await Archive.writeFile('./data/chats.json', JSON.stringify(chats))
         } catch (error) {
             console.log(error)
         }
@@ -163,4 +163,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, getChatFromChatName, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
+export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId}

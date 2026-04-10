@@ -1,5 +1,5 @@
-import express, { request, response } from 'express'
-import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage, deleteChat, getChatFromChatName} from '../controllers/modelController.js'
+import express from 'express'
+import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage, getMessageFromId} from '../controllers/modelController.js'
 
 const chatRouter = express.Router()
 
@@ -53,11 +53,25 @@ chatRouter.delete('/:id', async (request, response) => {
 })
 
 chatRouter.get('/:id/messages', (request, response)=>{
-    
+    const chatId = parseInt(request.params.id)
+    response.redirect(`/chats/${chatId}`)
 })
 
-chatRouter.get('/:id/messages/:id', (request, response)=>{
-    
+chatRouter.get('/:id/messages/:messageId', (request, response)=>{
+    const chatId = parseInt(request.params.id)
+    console.log(chatId)
+    const messageId = parseInt(request.params.messageId)
+    const chat = getChatFromId(chatId)
+    const message = getMessageFromId(messageId)
+    if (message && chat) {
+       if (chat.id == message.chatId) {
+            response.render('specificMessage', {message, chat})
+        } else {
+            response.redirect(`/chats/${chatId}`)
+        }
+    } else {
+        response.redirect(`/chats/${chatId}`)
+    }
 })
 
 chatRouter.post('/:id/sendMessage', async (request, response) => {
