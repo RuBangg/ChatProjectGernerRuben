@@ -4,7 +4,8 @@ import {addUser, getUsers, getUserFromUsernameAndPassword} from '../controllers/
 const userRouter = express.Router()
 
 userRouter.get('/', (request, response)=>{
-    
+    const users = getUsers()
+    response.render('users', {users})
 })
 
 userRouter.get('/:id', (request, response)=>{

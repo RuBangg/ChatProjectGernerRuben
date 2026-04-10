@@ -1,0 +1,17 @@
+html 
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self';">
+    link(rel="stylesheet", href="/aStoneColdStyle.css")
+    head 
+        title BestChatServisEver
+        //link(rel="stylesheet", href="/style.css")
+    body 
+        h1 SendingRock
+        p
+            a(href="/") Startside
+        
+        #userOverview
+            h2 Users
+            ul 
+                each user in users
+                    li
+                        a(href="/users/" + user.id, class="link") User #{user.id}: #{user.username},

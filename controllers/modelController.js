@@ -35,7 +35,7 @@ if (messagesData) {
 }
 
 async function addUser(username, password, dateCreation, userLevel) {
-    const user = new User(username, password, dateCreation, userLevel)
+    const user = await new User(username, password, dateCreation, userLevel)
     users.push(user)
     if (Archive.fileExists('./data/users.json')) {
         try {
@@ -47,7 +47,7 @@ async function addUser(username, password, dateCreation, userLevel) {
 }
 
 async function addChat(name, dateCreation, userOwner) {
-    const chat = new Chat(name, dateCreation, userOwner)
+    const chat = await new Chat(name, dateCreation, userOwner)
     chats.push(chat)
     if (Archive.fileExists('./data/chats.json')) {
         try {
@@ -72,7 +72,7 @@ async function deleteChat(chatId) {
 }
 
 async function addMessage(besked, user, chatId) {
-    const message = new Message(besked, user, chatId)
+    const message = await new Message(besked, user, chatId)
     const chat = getChatFromId(chatId)
     chat.messagesHistory.push(message)
     allMessages.push(message)
