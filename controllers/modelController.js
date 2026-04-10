@@ -61,6 +61,7 @@ async function addChat(name, dateCreation, userOwner) {
 async function deleteChat(chatId) {
     const chat = getChatFromId(chatId)
     chats = chats.filter(c => c!== chat);
+    allMessages = allMessages.filter(m => !chat.messagesHistory.some(message => message.id == m.id))
     console.log(chats)
     if (Archive.fileExists('./data/messages.json')) {
         try {
@@ -70,6 +71,15 @@ async function deleteChat(chatId) {
             console.log(error)
         }
     }
+    if (Archive.fileExists('./data/messages.json')) {
+        try {
+            await Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
+        } catch (error) {
+            console.log('FEJL')
+            console.log(error)
+        }
+    }
+
 }
 
 async function addMessage(besked, user, chatId) {
