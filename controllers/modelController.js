@@ -60,7 +60,7 @@ async function addChat(name, dateCreation, userOwner) {
 
 async function deleteChat(chatId) {
     const chat = getChatFromId(chatId)
-    chats.filter(c => c!== chat);
+    chats = chats.filter(c => c!== chat);
     console.log(chats)
     if (Archive.fileExists('./data/messages.json')) {
         try {
@@ -162,9 +162,11 @@ function getChatFromMessageId(id){
 }
 
 function getChatFromChatName(name){
+    console.log("testDeleteChat3")
 const x = chats.find(chat => {
     return chat.name == name;
 });
+    console.log(x)
     return x
 }
 
@@ -173,4 +175,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId, getUserMessagesFromUserId}
+export {addUser, addChat, deleteChat, getChatFromChatName, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId, getUserMessagesFromUserId}
