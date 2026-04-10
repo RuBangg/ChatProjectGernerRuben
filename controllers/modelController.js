@@ -13,7 +13,7 @@ if (usersData) {
     const biggestID = users.reduce((accumulator, user) => {
          return user.id >= accumulator ? user.id : accumulator
     },0)
-    User.id = biggestID
+    User.id = biggestID + 1
 }
 
 let chatsData = await Archive.readFile('./data/chats.json')
@@ -22,7 +22,7 @@ if (chatsData) {
     const biggestID = chats.reduce((accumulator, chat) => {
          return chat.id >= accumulator ? chat.id : accumulator
     },0)
-    Chat.id = biggestID
+    Chat.id = biggestID + 1
 }
 
 let messagesData = await Archive.readFile('./data/messages.json')
@@ -31,7 +31,7 @@ if (messagesData) {
     const biggestID = allMessages.reduce((accumulator, message) => {
          return message.id >= accumulator ? message.id : accumulator
     },0)
-    Message.id = biggestID
+    Message.id = biggestID + 1
 }
 
 async function addUser(username, password, dateCreation, userLevel) {
@@ -155,4 +155,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId}
+export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId}
