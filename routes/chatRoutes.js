@@ -47,8 +47,12 @@ chatRouter.get('/:id/messages/:messageId', (request, response)=>{
     const messageId = parseInt(request.params.messageId)
     const chat = getChatFromId(chatId)
     const message = getMessageFromId(messageId)
-    if (chat.id == message.chatId) {
-        response.render('specificMessage', {message, chat})
+    if (message && chat) {
+       if (chat.id == message.chatId) {
+            response.render('specificMessage', {message, chat})
+        } else {
+            response.redirect(`/chats/${chatId}`)
+        }
     } else {
         response.redirect(`/chats/${chatId}`)
     }
