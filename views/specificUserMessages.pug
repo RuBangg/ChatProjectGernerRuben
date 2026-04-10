@@ -9,9 +9,10 @@ html
             a(href="/") Startside
         h2
             strong= user.username
-
         p
-            |User #{user.id}: #{user.username}, userlevel: #{user.userLevel}
-        p 
-            |creation: #{user.dateCreation}
-        a(href="/users/" + user.id + "/messages", class="link") users messages
+            |User #{user.id}: #{user.username}, userlevel: #{user.userLevel}, creation: #{user.dateCreation}
+        h2 Users messages: 
+        ul 
+            each message in usersMessages
+                a(href="/chats/" + message.chatId + "/messages/" + message.id, class="link")
+                    p #{message.besked}

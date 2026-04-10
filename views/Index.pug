@@ -18,4 +18,5 @@ html
                     li
                         a(href="/chats/" + chat.id, class="link", ) #{chat.name}
         if validUser 
-            include snippets/logOutForm.pug        
+            include snippets/logOutForm.pug
+            a(href="/users", class="link", ) all users

@@ -137,6 +137,16 @@ function getUserFromId(id) {
     return users.find(user => user.id == id)
 }
 
+function getUserMessagesFromUserId(userId) {
+    let userMessages = []
+    for (let message of allMessages) {
+        if (message.user.id == userId) {
+            userMessages.push(message)
+        }
+    }
+    return userMessages
+}
+
 function getChatFromId(id) {
     return chats.find(chat => chat.id == id)
 }
@@ -163,4 +173,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId}
+export {addUser, addChat, deleteChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId, getUserMessagesFromUserId}
