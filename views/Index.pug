@@ -2,12 +2,12 @@ html
     head 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self';">
     link(rel="stylesheet", href="/aStoneColdStyle.css")
-        title BestChatServisEver
+    title BestChatServisEver
         //link(rel="stylesheet", href="/style.css")
     body 
         h1 SendingRock
         if validUser
-            if userlevel > 2
+            if userLevel >= 2
                 include snippets/cChat.pug  
         else
             include snippets/loginform.pug
