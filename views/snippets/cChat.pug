@@ -2,3 +2,6 @@
     form(action="/chats/newChat", method="POST")
         input(type="text", name="name", placeholder="Indtast navn")
         button(type="submit") Opret chat
+    form(action="/chats/deleteChat",method="POST")
+        input(type="text", name="deleteChat",placeholder="kill list")
+        button(type="submit") delete Chat

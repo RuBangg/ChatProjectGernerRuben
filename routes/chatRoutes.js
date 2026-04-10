@@ -1,5 +1,5 @@
-import express from 'express'
-import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage} from '../controllers/modelController.js'
+import express, { request, response } from 'express'
+import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage, deleteChat, getChatFromChatName} from '../controllers/modelController.js'
 
 const chatRouter = express.Router()
 
@@ -10,6 +10,22 @@ chatRouter.get('/', (request, response)=>{
 chatRouter.post('/newChat', async (request, response)=>{
     const user = getUserFromId(request.session.userId)
     await addChat(request.body.name, new Date(), user)
+    response.redirect('/')
+})
+
+chatRouter.post('/deleteChat', async (request,response)=>{
+    console.log("testDeleteChat")
+    const chatname = request.body.deleteChat
+    console.log(chatname)
+    try {
+        const chat = getChatFromChatName(chatname)
+        await deleteChat(chat.chatId)
+        console.log("tried to delete chat")
+        console.log(chat.id)
+        console.log(chat.name)
+    } catch (error) {
+        console.log("no chat to delete")
+    }
     response.redirect('/')
 })
 
