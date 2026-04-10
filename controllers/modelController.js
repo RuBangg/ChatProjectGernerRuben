@@ -60,7 +60,8 @@ async function addChat(name, dateCreation, userOwner) {
 
 async function deleteChat(chatId) {
     const chat = getChatFromId(chatId)
-    chats.filter(c => c!== chat)
+    chats.filter(c => c!== chat);
+    console.log(chats)
     if (Archive.fileExists('./data/messages.json')) {
         try {
             await Archive.writeFile('./data/messages.json', JSON.stringify(allMessages))
@@ -148,6 +149,13 @@ function getChatFromMessageId(id){
     return chats.find(chat =>
         chat.messagesHistory.some(msg => msg.id == id)
     )
+}
+
+function getChatFromChatName(name){
+const x = chats.find(chat => {
+    return chat.name == name;
+});
+    return x
 }
 
 function getUserLevelFromId(id) {

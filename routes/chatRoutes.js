@@ -13,6 +13,22 @@ chatRouter.post('/newChat', async (request, response)=>{
     response.redirect('/')
 })
 
+chatRouter.post('/deleteChat', async (request,response)=>{
+    console.log("testDeleteChat")
+    const chatname = request.body.deleteChat
+    console.log(chatname)
+    try {
+        const chat = getChatFromChatName(chatname)
+        await deleteChat(chat.chatId)
+        console.log("tried to delete chat")
+        console.log(chat.id)
+        console.log(chat.name)
+    } catch (error) {
+        console.log("no chat to delete")
+    }
+    response.redirect('/')
+})
+
 chatRouter.get('/:id', (request, response)=>{
     if (request.session.validUser) {
         const id = parseInt(request.params.id)
