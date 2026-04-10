@@ -1,5 +1,5 @@
 import express from 'express'
-import {addChat, getChatFromId, getUserFromId, addMessage, deleteMessage, getMessageFromId} from '../controllers/modelController.js'
+import {addChat, getChatFromId, deleteChat, getUserFromId, getChatFromChatName, addMessage, deleteMessage, getMessageFromId} from '../controllers/modelController.js'
 
 const chatRouter = express.Router()
 
@@ -18,8 +18,10 @@ chatRouter.post('/deleteChat', async (request,response)=>{
     const chatname = request.body.deleteChat
     console.log(chatname)
     try {
+        console.log('testDeleteChat2')
         const chat = getChatFromChatName(chatname)
-        await deleteChat(chat.chatId)
+        console.log(chat)
+        await deleteChat(chat.id)
         console.log("tried to delete chat")
         console.log(chat.id)
         console.log(chat.name)
