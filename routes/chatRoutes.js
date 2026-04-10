@@ -16,17 +16,24 @@ chatRouter.post('/newChat', async (request, response)=>{
 chatRouter.post('/deleteChat', async (request,response)=>{
     console.log("testDeleteChat")
     const chatname = request.body.deleteChat
+    const userId = request.session.userId
+    const user = getUserFromId(userId)
+    const chat = getChatFromChatName(chatname)
+    console.log(userId)
     console.log(chatname)
-    try {
-        console.log('testDeleteChat2')
-        const chat = getChatFromChatName(chatname)
-        console.log(chat)
-        await deleteChat(chat.id)
-        console.log("tried to delete chat")
-        console.log(chat.id)
-        console.log(chat.name)
-    } catch (error) {
-        console.log("no chat to delete")
+    if (chat.userOwner.id == userId || user.userLevel == 3) {
+        try {
+            console.log('testDeleteChat2')
+            console.log(chat)
+            await deleteChat(chat.id)
+            console.log("tried to delete chat")
+            console.log(chat.id)
+            console.log(chat.name)
+        } catch (error) {
+            console.log("no chat to delete")
+        }
+    } else {
+        console.log('User ejer ikke chatten og/eller er ikke userlevel 3')
     }
     response.redirect('/')
 })
