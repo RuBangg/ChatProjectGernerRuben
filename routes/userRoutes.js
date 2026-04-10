@@ -1,5 +1,5 @@
 import express from 'express'
-import {addUser, getUsers, getUserFromUsernameAndPassword} from '../controllers/modelController.js'
+import {addUser, getUsers, getUserFromUsernameAndPassword, getUserFromId} from '../controllers/modelController.js'
 
 const userRouter = express.Router()
 
@@ -9,7 +9,8 @@ userRouter.get('/', (request, response)=>{
 })
 
 userRouter.get('/:id', (request, response)=>{
-    
+    const user = getUserFromId(request.params.id)
+    response.render('specificUser', {user})
 })
 
 userRouter.get('/:id/messages', (request, response)=>{

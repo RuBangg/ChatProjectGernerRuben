@@ -1,0 +1,14 @@
+html 
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self';">
+    link(rel="stylesheet", href="/aStoneColdStyle.css")
+    head 
+        title BestChatServisEver
+    body
+        h1 User
+        p
+            a(href="/") Startside
+        h2
+            strong= user.username
+
+        p
+            |User #{user.id}: #{user.username}, userlevel: #{user.userLevel}, creation: #{user.creationDate}
