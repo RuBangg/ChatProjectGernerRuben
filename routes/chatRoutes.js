@@ -34,7 +34,15 @@ chatRouter.delete('/:id', async (request, response) => {
         console.error("DELETE ERROR:", error);
         response.status(500).send("Something broke");
     }
-});
+})
+
+chatRouter.get('/:id/messages', (request, response)=>{
+    
+})
+
+chatRouter.get('/:id/messages/:id', (request, response)=>{
+    
+})
 
 chatRouter.post('/:id/sendMessage', async (request, response) => {
     const chatId = parseInt(request.params.id)

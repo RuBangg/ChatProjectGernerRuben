@@ -3,6 +3,19 @@ import {addUser, getUsers, getUserFromUsernameAndPassword} from '../controllers/
 
 const userRouter = express.Router()
 
+userRouter.get('/', (request, response)=>{
+    
+})
+
+userRouter.get('/:id', (request, response)=>{
+    
+})
+
+userRouter.get('/:id/messages', (request, response)=>{
+    
+})
+
+
 userRouter.post('/login', (request, response)=>{
     const {username, password} = request.body
     const user = getUserFromUsernameAndPassword(username, password)
