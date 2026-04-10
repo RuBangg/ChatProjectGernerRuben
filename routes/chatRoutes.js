@@ -1,5 +1,5 @@
 import express from 'express'
-import {addChat, getChatFromId, deleteChat, getUserFromId, getChatFromChatName, addMessage, deleteMessage, getMessageFromId} from '../controllers/modelController.js'
+import {addChat, getChatFromId, deleteChat, getUserFromId, getChatFromChatName, addMessage, deleteMessage, getMessageFromId, renameChat} from '../controllers/modelController.js'
 
 const chatRouter = express.Router()
 
@@ -37,6 +37,20 @@ chatRouter.get('/:id', (request, response)=>{
         const chat = getChatFromId(id)
         const user = getUserFromId(request.session.userId)
         response.render('chat', {chat, user})
+    } else {
+        response.redirect('/')
+    }
+})
+
+chatRouter.post('/:id/changeName', async (request, response)=>{
+    if (request.session.validUser) {
+        const newName = request.body.Nytnavn
+        let chatensid = parseInt(request.params.id)
+        const chat = getChatFromId(chatensid)
+        console.log(chatensid)
+        console.log(chat)
+        await renameChat(newName, chat)
+        response.redirect(`/chats/${chatensid}`)
     } else {
         response.redirect('/')
     }

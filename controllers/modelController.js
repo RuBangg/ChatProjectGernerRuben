@@ -129,6 +129,19 @@ async function deleteMessage(messageId) {
     }
 }
 
+async function renameChat(nytnavn, chat) {
+    console.log(nytnavn)
+    chat.name = nytnavn
+    console.log(chat.name)
+    console.log(nytnavn)
+    if ( Archive.fileExists('./data/chats.json')) {
+        try {
+            await Archive.writeFile('./data/chats.json', JSON.stringify(chats))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 function getUsers() {
     return users
@@ -185,4 +198,4 @@ function getUserLevelFromId(id) {
     return user.userLevel
 }
 
-export {addUser, addChat, deleteChat, getChatFromChatName, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId, getUserMessagesFromUserId}
+export {addUser, addChat, deleteChat, getChatFromChatName, renameChat, addMessage, deleteMessage, getUsers, getChats, getUserFromUsernameAndPassword, getChatFromId, getUserFromId, getUserLevelFromId, getMessageFromId, getUserMessagesFromUserId}
